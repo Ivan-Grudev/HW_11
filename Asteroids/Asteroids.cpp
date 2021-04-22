@@ -2,16 +2,12 @@
 #include <time.h>
 #include <list>
 #include <random>
-//#include <string>
-
 using namespace sf;
 
 const int W = 1200;
 const int H = 800;
 
 float DEGTORAD = 0.017453f;
-
-//int MaxScore = 0;
 
 class Animation
 {
@@ -87,7 +83,6 @@ class Entity
      circle.setFillColor(Color(255,0,0,170));
      circle.setPosition(x,y);
      circle.setOrigin(R,R);
-     //app.draw(circle);
    }
 
    virtual ~Entity(){};
@@ -128,7 +123,6 @@ class bullet: public Entity
    {
      dx=cos(angle*DEGTORAD)*6;
      dy=sin(angle*DEGTORAD)*6;
-     // angle+=rand()%7-3;  /*try this*/
      x+=dx;
      y+=dy;
 
@@ -231,13 +225,10 @@ int main()
 
 
 
-    Font font;//шрифт 
-    font.loadFromFile("Chopsic.ttf");//передаем нашему шрифту файл шрифта
-    Text text("", font, 18);//создаем объект текст. закидываем в объект текст строку, шрифт, размер шрифта(в пикселях);//сам объект текст (не строка)
-    Text death("", font, 72);//создаем объект текст. закидываем в объект текст строку, шрифт, размер шрифта(в пикселях);//сам объект текст (не строка)
-    //Text health("", font, 20);
-    //text.setColor(Color::Red);//покрасили текст в красный. если убрать эту строку, то по умолчанию он белый
-   // text.setStyle(sf::Text::Bold);
+    Font font;//ГёГ°ГЁГґГІ 
+    font.loadFromFile("Chopsic.ttf");
+    Text text("", font, 18);
+    Text death("", font, 72);
 
     /////main loop/////
     while (app.isOpen())
@@ -348,19 +339,15 @@ int main()
         for (auto i = entities.begin(); i != entities.end();)
         {
             Entity* e = *i;
-
-            //if (e->name != "player" || e->life > 0)
-            //{
+           
             e->update();
             e->anim.update();
-            //}
 
             if (e->life == 0)
             {
                 std::string name = e->name;
 
                 i = entities.erase(i);
-                //delete e;
 
                 if (name != "player")
                     delete e;
@@ -372,16 +359,12 @@ int main()
         app.draw(background);
         for (auto i : entities) i->draw(app);
 
-        //text.setString("Max score:");//задает строку тексту
-        //text.setPosition(11, 10);//задаем позицию текста, центр камеры
-        //app.draw(text);
-
-        text.setString("Score:");//задает строку тексту
-        text.setPosition(15, 10);//задаем позицию текста, центр камеры
+        text.setString("Score:");
+        text.setPosition(15, 10);
         app.draw(text);
 
-        text.setString("Lives: ");//задает строку тексту
-        text.setPosition(15, 35);//задаем позицию текста, центр камеры
+        text.setString("Lives: ");
+        text.setPosition(15, 35);
         app.draw(text);
 
         text.setString("Health: ");
